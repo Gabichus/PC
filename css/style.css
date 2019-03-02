@@ -1,0 +1,12 @@
+.cards  {
+    padding-top: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;    
+}
+
+#contentCard{
+    margin: 5px;
+    width: 20% !important;
+    text-align: center;
+}

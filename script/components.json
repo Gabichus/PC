@@ -1,0 +1,141 @@
+{
+    "cpu":
+    [ 
+        {
+            "name":"i5 4690k",
+            "frequence":"3.5GHz",
+            "socket":1150,
+            "price":250,
+            "img":"../assets/cpu1.jpg"
+         },
+         
+        {
+            "name":"i7 4770k",
+            "frequence":"4GHz",
+            "socket":1150,
+            "price":350,
+            "img":"../assets/cpu2.jpg"
+         }
+    ],
+    "gpu":
+    [
+        {
+            "name":"gtx 1060",
+            "frequence":"100Ghz",
+            "memory":"6GB",
+            "price":300,
+            "img":"../assets/video1.jpg"
+        },
+        {
+            "name":"gtx 1070",
+            "frequence":"200Ghz",
+            "memory":"8GB",
+            "price":400,
+            "img":"../assets/video1.jpg"
+        }
+    ],
+    "motherboard":
+    [
+         {
+             "name":"asus z97k",
+             "socket":1150,
+             "memoryslot":4,
+             "gpuslot":1,
+             "ramtype":"ddr3",
+             "price":200,
+             "img":"../assets/moth1.jpg"
+         },
+         {
+             "name":"GA-H81M-S1",
+             "socket":1150,
+             "memoryslot":2,
+             "gpuslot":1,
+             "ramtype":"ddr3",
+             "price":125,
+             "img":"../assets/moth2.jpg"
+         }
+    ],
+    "ram":
+    [
+         {
+             "name":"Kingston HyperX FURY",
+             "type":"ddr3",
+             "capacity":"8gb",
+             "frequence":"1866Mhz",
+             "price":80,
+             "img":"../assets/ram1.jpg"
+         },
+         {
+            "name":"Hynix Original",
+            "type":"ddr3",
+            "capacity":"4gb",
+            "frequence":"1600Mhz",
+            "price":50,
+            "img":"../assets/ram2.jpg"
+        }
+    ],
+    "rom":[
+         {
+             "name":"Western Digital WD10",
+             "type":"hdd",
+             "speed":"7200rpm",
+             "capacity":"1000gb",
+             "price":120,
+             "img":"../assets/rom2.jpg"
+         },
+         {
+            "name":"Samsung 860 PRO",
+            "type":"ssd",
+            "speed":"560/530MB/s",
+            "capacity":"512gb",
+            "price":330,
+            "img":"../assets/rom1.jpg"
+        }
+    ],
+    "monitor":[
+         {
+             "name":"ACER IPS LED SA220QBID",
+             "type":"ips",
+             "size":"21.5",
+             "price":400,
+             "img":"../assets/mon1.png"
+         },
+        {
+            "name": "AOC LED e970Swn",
+            "type":"tn",
+            "size":"18.5",
+            "price":160,
+            "img":"../assets/mon2.jpg"
+        }
+    ],
+    "mouse":[
+        {
+            "name":"LOGITECH G305",
+            "type":"Wireless",
+            "price":50,
+            "img":"../assets/mouse1.jpg"
+        },
+        {
+            "name":"HyperX Pulsefire",
+            "type":"usb",
+            "price":70,
+            "img":"../assets/mouse2.jpg"
+        }
+    ],
+    "keyboard":[
+        {
+            "name":"LOGITECH G512",
+            "type":"mechanics",
+            "price":90,
+            "img":"../assets/keyboard1.jpg"
+        },
+        {
+            "name":"HyperX Alloy FPS PRO",
+            "type":"mechanics",
+            "price":120,
+            "img":"../assets/keyboard2.jpg"
+        }
+    ]
+
+    
+}
