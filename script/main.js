@@ -4,15 +4,12 @@ window.onload = function(){
 	  const response = await fetch('script/components.json')
     json = await response.json()
     console.log(json)
-
-	})()
+  })()
 }
 
 
 document.addEventListener('DOMContentLoaded', function(){
-  document.addEventListener('click',function(e){
-    console.log(e);
-  })
+  
     document.querySelector('#cpu').addEventListener('click', function(){
         let content = document.querySelector('#products');
         content.innerHTML = ``;
@@ -29,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     <li class="list-group-item">Price: `+json.cpu[i].price+`</li>
                   </ul>
                   <div class="card-body">
-                  <button type="button" class="btn btn-success" value="cpu[`+i+`]">Add</button>
+                  <button type="button" class="btn btn-success" value="`+[1,i]+`">Add</button>
                   </div>
                 </div>`
             }
@@ -51,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     <li class="list-group-item">Price: `+json.gpu[i].price+`</li>
                   </ul>
                   <div class="card-body">
-                  <button type="button" class="btn btn-success" value="gpu[`+i+`]">Add</button>
+                  <button type="button" class="btn btn-success" value="`+[2,i]+`">Add</button>
                   </div>
                 </div>`
             }
@@ -75,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
                   <li class="list-group-item">`+json.motherboard[i].price+`</li>
                 </ul>
                 <div class="card-body">
-                <button type="button" class="btn btn-success" value="moherboard[`+i+`]">Add</button>
+                <button type="button" class="btn btn-success" value="`+[3,i]+`">Add</button>
                 </div>
               </div>`
           }
@@ -98,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 <li class="list-group-item">Price: `+json.ram[i].price+`</li>
               </ul>
               <div class="card-body">
-              <button type="button" class="btn btn-success" value="ram[`+i+`]">Add</button>
+              <button type="button" class="btn btn-success" value="`+[4,i]+`">Add</button>
               </div>
             </div>`
         }
@@ -121,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function(){
                   <li class="list-group-item">Price: `+json.rom[i].price+`</li>
                 </ul>
                 <div class="card-body">
-                <button type="button" class="btn btn-success"value="rom[`+i+`]">Add</button>
+                <button type="button" class="btn btn-success"value="`+[5,i]+`">Add</button>
                 </div>
               </div>`
           }
@@ -143,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function(){
                   <li class="list-group-item">Price: `+json.monitor[i].price+`</li>
                 </ul>
                 <div class="card-body">
-                <button type="button" class="btn btn-success" value="monitor[`+i+`]">Add</button>
+                <button type="button" class="btn btn-success" value="`+[6,i]+`">Add</button>
                 </div>
               </div>`
           }
@@ -164,12 +161,12 @@ document.addEventListener('DOMContentLoaded', function(){
                   <li class="list-group-item">Price: `+json.mouse[i].price+`</li>
                 </ul>
                 <div class="card-body">
-                <button type="button" class="btn btn-success" value="mouse[`+i+`]">Add</button>
+                <button type="button" class="btn btn-success" value="`+[7,i]+`">Add</button>
                 </div>
               </div>`
           }
     })
-
+  
     document.querySelector('#keyboard').addEventListener('click', function(){
       let content = document.querySelector('#products');
       content.innerHTML = ``;
@@ -185,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function(){
                   <li class="list-group-item">Price: `+json.keyboard[i].price+`</li>
                 </ul>
                 <div class="card-body">
-                <button type="button" class="btn btn-success"value="keyboard[`+i+`]">Add</button>
+                <button type="button" class="btn btn-success"value="`+[8,i]+`">Add</button>
                 </div>
               </div>`
           }
@@ -195,7 +192,24 @@ document.addEventListener('DOMContentLoaded', function(){
       let bclick = document.querySelectorAll('.btn-success');
       for (let i= 0;  i < bclick.length;  i++) {
         bclick[i].onclick = function(){
-          alert(bclick[i].value);
+          switch(bclick[i].value[0]){
+            case '1':console.log(json.cpu[bclick[i].value[2]]);
+              break;
+            case '2':console.log(json.gpu[bclick[i].value[2]])
+              break;
+            case '3':console.log(json.motherboard[bclick[i].value[2]])
+              break;
+            case '4':console.log(json.ram[bclick[i].value[2]])
+              break;
+            case '5':console.log(json.rom[bclick[i].value[2]])
+              break;
+            case '6':console.log(json.monitor[bclick[i].value[2]])
+              break;
+            case '7':console.log(json.mouse[bclick[i].value[2]])
+              break;
+            case '8':console.log(json.keyboard[bclick[i].value[2]])
+              break;
+          }
         }
       };
     })
