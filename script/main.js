@@ -194,20 +194,28 @@ document.addEventListener('DOMContentLoaded', function(){
         bclick[i].onclick = function(){
           switch(bclick[i].value[0]){
             case '1':console.log(json.cpu[bclick[i].value[2]]);
+                    localStorage.setItem('localcpu',[bclick[i].value[2],1]);
               break;
             case '2':console.log(json.gpu[bclick[i].value[2]])
+                    localStorage.setItem('localgpu',[bclick[i].value[2],1]);
               break;
             case '3':console.log(json.motherboard[bclick[i].value[2]])
+                    localStorage.setItem('localmotherboard',[bclick[i].value[2],1]);
               break;
             case '4':console.log(json.ram[bclick[i].value[2]])
+                    localStorage.setItem('localram',[bclick[i].value[2],1]);
               break;
             case '5':console.log(json.rom[bclick[i].value[2]])
+                    localStorage.setItem('localrom',[bclick[i].value[2],1]);
               break;
             case '6':console.log(json.monitor[bclick[i].value[2]])
+                    localStorage.setItem('localmonitor',[bclick[i].value[2],1]);
               break;
             case '7':console.log(json.mouse[bclick[i].value[2]])
+                    localStorage.setItem('localmouse',[bclick[i].value[2],1]);
               break;
             case '8':console.log(json.keyboard[bclick[i].value[2]])
+                    localStorage.setItem('localkeyboard',[bclick[i].value[2],1]);
               break;
           }
         }
