@@ -5,6 +5,15 @@ window.onload = function(){
     json = await response.json()
     console.log(json)
   })()
+  var prod=['localcpu','localgpu','localmotherboard','localram','localrom','localmonitor','localmouse','localkeyboard'];
+  
+  for(i=0;i<8;i++){
+    if(!localStorage.hasOwnProperty(prod[i])){
+      var a=[];
+      a.push(JSON.parse(localStorage.getItem(prod[i])));
+      localStorage.setItem(prod[i], JSON.stringify(a));
+    }
+  }
 }
 
 
@@ -193,29 +202,21 @@ document.addEventListener('DOMContentLoaded', function(){
       for (let i= 0;  i < bclick.length;  i++) {
         bclick[i].onclick = function(){
           switch(bclick[i].value[0]){
-            case '1':console.log(json.cpu[bclick[i].value[2]]);
-                    localStorage.setItem('localcpu',[bclick[i].value[2],1]);
+            case '1':SaveDataToLocalStorage("localcpu",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '2':console.log(json.gpu[bclick[i].value[2]])
-                    localStorage.setItem('localgpu',[bclick[i].value[2],1]);
+           case '2':SaveDataToLocalStorage("localgpu",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '3':console.log(json.motherboard[bclick[i].value[2]])
-                    localStorage.setItem('localmotherboard',[bclick[i].value[2],1]);
+            case '3':SaveDataToLocalStorage("localmotherboard",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '4':console.log(json.ram[bclick[i].value[2]])
-                    localStorage.setItem('localram',[bclick[i].value[2],1]);
+            case '4':SaveDataToLocalStorage("localram",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '5':console.log(json.rom[bclick[i].value[2]])
-                    localStorage.setItem('localrom',[bclick[i].value[2],1]);
+            case '5':SaveDataToLocalStorage("localrom",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '6':console.log(json.monitor[bclick[i].value[2]])
-                    localStorage.setItem('localmonitor',[bclick[i].value[2],1]);
+            case '6':SaveDataToLocalStorage("localmonitor",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '7':console.log(json.mouse[bclick[i].value[2]])
-                    localStorage.setItem('localmouse',[bclick[i].value[2],1]);
+            case '7':SaveDataToLocalStorage("localmouse",[parseInt(bclick[i].value[2]),1]);
               break;
-            case '8':console.log(json.keyboard[bclick[i].value[2]])
-                    localStorage.setItem('localkeyboard',[bclick[i].value[2],1]);
+            case '8':SaveDataToLocalStorage("localkeyboard",[parseInt(bclick[i].value[2]),1]);
               break;
           }
         }
@@ -223,3 +224,25 @@ document.addEventListener('DOMContentLoaded', function(){
     })
     
 })
+
+function SaveDataToLocalStorage(localStorageType,data)
+{
+  JSON.parse(localStorage.getItem(localStorageType)).forEach(element => {
+    console.log(element[0]);
+    isNotNull();
+  });
+}
+
+let isNotNull = function(localStorageType,data,elem){
+  if(false){
+    console.log("true");
+    var a = [];
+    a = JSON.parse(localStorage.getItem(localStorageType));
+    a.push(data);
+    localStorage.setItem(localStorageType, JSON.stringify(a));
+    return true;
+  }else{
+    console.log("false");
+    return false;
+  }
+}
