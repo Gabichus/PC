@@ -13,7 +13,7 @@ window.onload = function(){
       a.push(JSON.parse(localStorage.getItem(prod[i])));
       localStorage.setItem(prod[i], JSON.stringify(a));
     }
-  }
+  } 
 }
 
 
@@ -225,24 +225,44 @@ document.addEventListener('DOMContentLoaded', function(){
     
 })
 
+let b;
+let parsedJson;
+let SaveData;
 function SaveDataToLocalStorage(localStorageType,data)
 {
-  JSON.parse(localStorage.getItem(localStorageType)).forEach(element => {
-    console.log(element[0]);
-    isNotNull();
-  });
+  b=JSON.parse(localStorage.getItem(localStorageType)).length;
+  parsedJson=JSON.parse(localStorage.getItem(localStorageType));
+  SaveData=data;
+  isNotNull(localStorageType,data).then(isExist);
 }
 
-let isNotNull = function(localStorageType,data,elem){
-  if(false){
-    console.log("true");
-    var a = [];
-    a = JSON.parse(localStorage.getItem(localStorageType));
-    a.push(data);
-    localStorage.setItem(localStorageType, JSON.stringify(a));
-    return true;
-  }else{
-    console.log("false");
-    return false;
-  }
+let isNotNull = function(localStorageType,data){
+  return new Promise(function(resolve, reject){
+    setTimeout(function(){
+    if(JSON.parse(localStorage.getItem(localStorageType)).length!=1){
+      resolve('isNotNull');
+    }else{
+      var a = [];
+      a = JSON.parse(localStorage.getItem(localStorageType));
+      a.push(data);
+      localStorage.setItem(localStorageType, JSON.stringify(a));
+      reject('isNull');
+    }
+  }, 1);
+  })
+}
+
+let isExist= function(){
+  return new Promise(function(resolve, reject){
+    var isExistBool=false;
+    for(i=1;i<b;i++){
+      if(parsedJson[i][0]==SaveData[0]) isExistBool=true;
+    }
+		if(isExistBool){
+      console.log("este");
+			resolve('este');
+    }else
+
+			reject('nu este');
+	})
 }
