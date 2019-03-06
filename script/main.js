@@ -16,12 +16,16 @@ window.onload = function(){
   } 
 }
 
+function htmlclear(){
+  document.querySelector('#products').innerHTML=``;
+  document.querySelector('#shopingTable').innerHTML=``;
+}
 
 document.addEventListener('DOMContentLoaded', function(){
   
     document.querySelector('#cpu').addEventListener('click', function(){
         let content = document.querySelector('#products');
-        content.innerHTML = ``;
+        htmlclear();
         for(let i=0;i<json.gpu.length;i++){
         content.innerHTML += `
                 <div class="card" id="contentCard" style="width: 13rem";>
@@ -40,10 +44,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>`
             }
     })
-
     document.querySelector('#gpu').addEventListener('click', function(){
         let content = document.querySelector('#products');
-        content.innerHTML = ``;
+        htmlclear();
         for(let i=0;i<json.gpu.length;i++){
         content.innerHTML += `
                 <div class="card" id="contentCard" style="width: 13rem";>
@@ -65,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     document.querySelector('#motherboard').addEventListener('click', function(){
       let content = document.querySelector('#products');
-      content.innerHTML = ``;
+      htmlclear();
       for(let i=0;i<json.motherboard.length;i++){
       content.innerHTML += `
               <div class="card" id="contentCard" style="width: 13rem";>
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
      document.querySelector('#ram').addEventListener('click', function(){
     let content = document.querySelector('#products');
-    content.innerHTML = ``;
+    htmlclear();
     for(let i=0;i<json.ram.length;i++){
     content.innerHTML += `
             <div class="card" id="contentCard" style="width: 13rem";>
@@ -112,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     document.querySelector('#rom').addEventListener('click', function(){
       let content = document.querySelector('#products');
-      content.innerHTML = ``;
+      htmlclear();
       for(let i=0;i<json.rom.length;i++){
       content.innerHTML += `
               <div class="card" id="contentCard" style="width: 13rem";>
@@ -135,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     document.querySelector('#monitor').addEventListener('click', function(){
       let content = document.querySelector('#products');
-      content.innerHTML = ``;
+      htmlclear();
       for(let i=0;i<json.ram.length;i++){
       content.innerHTML += `
               <div class="card" id="contentCard" style="width: 13rem"";>
@@ -157,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     document.querySelector('#mouse').addEventListener('click', function(){
       let content = document.querySelector('#products');
-      content.innerHTML = ``;
+      htmlclear();
       for(let i=0;i<json.ram.length;i++){
       content.innerHTML += `
               <div class="card" id="contentCard" style="width: 13rem";>
@@ -167,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Type: `+json.mouse[i].type+`</li>
+                  <li class="list-group-item">Type: `+json.mouse[i].typeSensor+`</li>
                   <li class="list-group-item">Price: `+json.mouse[i].price+`</li>
                 </ul>
                 <div class="card-body">
@@ -178,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function(){
   
     document.querySelector('#keyboard').addEventListener('click', function(){
       let content = document.querySelector('#products');
-      content.innerHTML = ``;
+      htmlclear();
       for(let i=0;i<json.ram.length;i++){
       content.innerHTML += `
               <div class="card" id="contentCard" style="width: 13rem";>
@@ -188,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Type: `+json.keyboard[i].type+`</li>
+                  <li class="list-group-item">Type Connect: `+json.keyboard[i].typeconnect+`</li>
                   <li class="list-group-item">Price: `+json.keyboard[i].price+`</li>
                 </ul>
                 <div class="card-body">
@@ -195,6 +200,28 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>
               </div>`
           }
+    })
+
+    document.querySelector('#shopingCard').addEventListener('click', function(){
+      let content = document.querySelector('#shopingTable');
+      htmlclear();
+      content.innerHTML += `
+        <thead>
+          <tr>
+            <th scope="col" colspan="5" class="text-center">Name</th>
+          </tr>
+        </thead>`
+        content.innerHTML += `
+        <tbody>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@fat</td>
+            <td>@fat</td>
+          </tr>
+        </tbody>
+      `     
     })
 
     document.addEventListener('click', function(){
@@ -222,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       };
     })
-    
 })
 
 let b;

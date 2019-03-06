@@ -112,12 +112,14 @@
         {
             "name":"LOGITECH G305",
             "type":"Wireless",
+            "typeSensor":"Laser",
             "price":50,
             "img":"../assets/mouse1.jpg"
         },
         {
             "name":"HyperX Pulsefire",
             "type":"usb",
+            "typeSensor":"Laser",
             "price":70,
             "img":"../assets/mouse2.jpg"
         }
@@ -126,12 +128,14 @@
         {
             "name":"LOGITECH G512",
             "type":"mechanics",
+            "typeconnect":"usb",
             "price":90,
             "img":"../assets/keyboard1.jpg"
         },
         {
             "name":"HyperX Alloy FPS PRO",
             "type":"mechanics",
+            "typeconnect":"usb",
             "price":120,
             "img":"../assets/keyboard2.jpg"
         }
