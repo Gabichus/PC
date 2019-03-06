@@ -228,27 +228,27 @@ document.addEventListener('DOMContentLoaded', function(){
 let b;
 let parsedJson;
 let SaveData;
+let localForExist;
 function SaveDataToLocalStorage(localStorageType,data)
 {
   b=JSON.parse(localStorage.getItem(localStorageType)).length;
   parsedJson=JSON.parse(localStorage.getItem(localStorageType));
   SaveData=data;
-  isNotNull(localStorageType,data).then(isExist);
+  localForExist=localStorageType;
+  isNotNull().then(isExist).catch(ll);
 }
 
-let isNotNull = function(localStorageType,data){
+let isNotNull = function(){
   return new Promise(function(resolve, reject){
-    setTimeout(function(){
-    if(JSON.parse(localStorage.getItem(localStorageType)).length!=1){
-      resolve('isNotNull');
-    }else{
-      var a = [];
-      a = JSON.parse(localStorage.getItem(localStorageType));
-      a.push(data);
-      localStorage.setItem(localStorageType, JSON.stringify(a));
-      reject('isNull');
-    }
-  }, 1);
+      if(JSON.parse(localStorage.getItem(localForExist)).length!=1){
+        resolve('isNotNull');
+      }else{
+        var a = [];
+        a = JSON.parse(localStorage.getItem(localForExist));
+        a.push(SaveData);
+        localStorage.setItem(localForExist, JSON.stringify(a));
+        reject('isNull');
+      }
   })
 }
 
@@ -261,8 +261,16 @@ let isExist= function(){
 		if(isExistBool){
       console.log("este");
 			resolve('este');
-    }else
-
-			reject('nu este');
+    }else{
+      var a = [];
+      a = JSON.parse(localStorage.getItem(localForExist));
+      a.push(SaveData);
+      localStorage.setItem(localForExist, JSON.stringify(a));
+      console.log("nu este");
+      reject('nu este');
+    }
 	})
+}
+let ll=function(){
+  console.log("catch");
 }
