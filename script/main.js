@@ -20,6 +20,26 @@ function htmlclear(){
   document.querySelector('#products').innerHTML=``;
   document.querySelector('#shopingTable').innerHTML=``;
 }
+function createCard(title, img, elementNumber, i, ops){
+  let opsHTML = "";
+  ops.forEach(element => {
+    opsHTML = `${opsHTML} <li class="list-group-item"> ${element} </li> `;
+  });
+  
+  document.querySelector('#products').innerHTML += `
+      <div class="card" id="contentCard" style="width: 13rem";>
+        <img class="card-img-top" src="`+img+`" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">`+title+`</h5>
+        </div>
+        <ul class="list-group list-group-flush">  
+          ${opsHTML}
+        </ul>
+        <div class="card-body">
+        <button type="button" class="btn btn-success" value="`+[elementNumber,i]+`">Add</button>
+        </div>
+      </div>`;
+  }
 
 document.addEventListener('DOMContentLoaded', function(){
   
@@ -27,42 +47,14 @@ document.addEventListener('DOMContentLoaded', function(){
         let content = document.querySelector('#products');
         htmlclear();
         for(let i=0;i<json.gpu.length;i++){
-        content.innerHTML += `
-                <div class="card" id="contentCard" style="width: 13rem";>
-                  <img class="card-img-top" src="`+json.cpu[i].img+`" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">`+json.cpu[i].name+`</h5>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Frequence: `+json.cpu[i].frequence+`</li>
-                    <li class="list-group-item">Socket: `+json.cpu[i].socket+`</li>
-                    <li class="list-group-item">Price: `+json.cpu[i].price+`</li>
-                  </ul>
-                  <div class="card-body">
-                  <button type="button" class="btn btn-success" value="`+[1,i]+`">Add</button>
-                  </div>
-                </div>`
+        createCard(json.cpu[i].name,json.cpu[i].img,1,i,[`Frequence: ${json.cpu[i].frequence}`, `Socket: ${json.cpu[i].socket}`, `Price : ${json.cpu[i].price}` ]);
             }
     })
     document.querySelector('#gpu').addEventListener('click', function(){
         let content = document.querySelector('#products');
         htmlclear();
         for(let i=0;i<json.gpu.length;i++){
-        content.innerHTML += `
-                <div class="card" id="contentCard" style="width: 13rem";>
-                  <img class="card-img-top" src="`+json.gpu[i].img+`" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title">`+json.gpu[i].name+`</h5>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Frequence: `+json.gpu[i].frequence+`</li>
-                    <li class="list-group-item">Memory: `+json.gpu[i].memory+`</li>
-                    <li class="list-group-item">Price: `+json.gpu[i].price+`</li>
-                  </ul>
-                  <div class="card-body">
-                  <button type="button" class="btn btn-success" value="`+[2,i]+`">Add</button>
-                  </div>
-                </div>`
+          createCard(json.gpu[i].name,json.gpu[i].img,2,i,[`Frequence: ${json.gpu[i].frequence}`, `Memory: ${json.gpu[i].memory}`, `Price : ${json.gpu[i].price}` ]);
             }
     })
 
