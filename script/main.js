@@ -23,7 +23,7 @@ function htmlclear(){
 function createCard(title, img, elementNumber, i, ops){
   let opsHTML = "";
   ops.forEach(element => {
-    opsHTML = `${opsHTML} <li class="list-group-item"> ${element} </li> `;
+    opsHTML += `<li class="list-group-item"> ${element} </li> `;
   });
   
   document.querySelector('#products').innerHTML += `
@@ -47,128 +47,56 @@ document.addEventListener('DOMContentLoaded', function(){
         let content = document.querySelector('#products');
         htmlclear();
         for(let i=0;i<json.gpu.length;i++){
-        createCard(json.cpu[i].name,json.cpu[i].img,1,i,[`Frequence: ${json.cpu[i].frequence}`, `Socket: ${json.cpu[i].socket}`, `Price : ${json.cpu[i].price}` ]);
-            }
+          createCard(json.cpu[i].name,json.cpu[i].img,1,i,[`Frequence: ${json.cpu[i].frequence}`, `Socket: ${json.cpu[i].socket}`, `Price : ${json.cpu[i].price}` ]);
+        }
     })
+
     document.querySelector('#gpu').addEventListener('click', function(){
         let content = document.querySelector('#products');
         htmlclear();
         for(let i=0;i<json.gpu.length;i++){
-          createCard(json.gpu[i].name,json.gpu[i].img,2,i,[`Frequence: ${json.gpu[i].frequence}`, `Memory: ${json.gpu[i].memory}`, `Price : ${json.gpu[i].price}` ]);
-            }
+            createCard(json.gpu[i].name,json.gpu[i].img,2,i,[`Frequence: ${json.gpu[i].frequence}`, `Memory: ${json.gpu[i].memory}`, `Price : ${json.gpu[i].price}` ]);
+        }
     })
 
     document.querySelector('#motherboard').addEventListener('click', function(){
       let content = document.querySelector('#products');
       htmlclear();
       for(let i=0;i<json.motherboard.length;i++){
-      content.innerHTML += `
-              <div class="card" id="contentCard" style="width: 13rem";>
-                <img class="card-img-top" src="`+json.motherboard[i].img+`" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">`+json.motherboard[i].name+`</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">`+json.motherboard[i].socket+`</li>
-                  <li class="list-group-item">`+json.motherboard[i].memoryslot+`</li>
-                  <li class="list-group-item">`+json.motherboard[i].gpuslot+`</li>
-                  <li class="list-group-item">`+json.motherboard[i].ramtype+`</li>
-                  <li class="list-group-item">`+json.motherboard[i].price+`</li>
-                </ul>
-                <div class="card-body">
-                <button type="button" class="btn btn-success" value="`+[3,i]+`">Add</button>
-                </div>
-              </div>`
-          }
+          createCard(json.motherboard[i].name,json.motherboard[i].img,3,i,[`Socket: ${json.motherboard[i].socket}`, `Memory slots: ${json.motherboard[i].memoryslot}`, `Gpu slots: ${json.motherboard[i].gpuslot}`, `Ram Type: ${json.motherboard[i].ramtype}`, `Price : ${json.motherboard[i].price}` ]);
+      }
     })
 
-     document.querySelector('#ram').addEventListener('click', function(){
-    let content = document.querySelector('#products');
-    htmlclear();
-    for(let i=0;i<json.ram.length;i++){
-    content.innerHTML += `
-            <div class="card" id="contentCard" style="width: 13rem";>
-              <img class="card-img-top" src="`+json.ram[i].img+`" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">`+json.ram[i].name+`</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Type: `+json.ram[i].type+`</li>
-                <li class="list-group-item">Capacity: `+json.ram[i].capacity+`</li>
-                <li class="list-group-item">Frequence: `+json.ram[i].frequence+`</li>
-                <li class="list-group-item">Price: `+json.ram[i].price+`</li>
-              </ul>
-              <div class="card-body">
-              <button type="button" class="btn btn-success" value="`+[4,i]+`">Add</button>
-              </div>
-            </div>`
-        }
+    document.querySelector('#ram').addEventListener('click', function(){
+      let content = document.querySelector('#products');
+      htmlclear();
+      for(let i=0;i<json.ram.length;i++){
+        createCard(json.ram[i].name,json.ram[i].img,4,i,[`Type: ${json.ram[i].type}`, `Capacity: ${json.ram[i].capacity}`,`Frequence ${json.ram[i].frequence}`, `Price : ${json.ram[i].price}` ]);
+
+      }
     })
 
     document.querySelector('#rom').addEventListener('click', function(){
       let content = document.querySelector('#products');
       htmlclear();
       for(let i=0;i<json.rom.length;i++){
-      content.innerHTML += `
-              <div class="card" id="contentCard" style="width: 13rem";>
-                <img class="card-img-top" src="`+json.rom[i].img+`" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">`+json.rom[i].name+`</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Type: `+json.rom[i].type+`</li>
-                  <li class="list-group-item">Capacity: `+json.rom[i].capacity+`</li>
-                  <li class="list-group-item">Frequence: `+json.rom[i].speed+`</li>
-                  <li class="list-group-item">Price: `+json.rom[i].price+`</li>
-                </ul>
-                <div class="card-body">
-                <button type="button" class="btn btn-success"value="`+[5,i]+`">Add</button>
-                </div>
-              </div>`
-          }
+        createCard(json.rom[i].name,json.rom[i].img,5,i,[`Type: ${json.rom[i].type}`, `Speed: ${json.rom[i].speed}`, `Capacity: ${json.rom[i].capacity}`,`Price : ${json.rom[i].price}` ]);
+      }
     })
 
     document.querySelector('#monitor').addEventListener('click', function(){
       let content = document.querySelector('#products');
       htmlclear();
       for(let i=0;i<json.ram.length;i++){
-      content.innerHTML += `
-              <div class="card" id="contentCard" style="width: 13rem"";>
-                <img class="card-img-top" src="`+json.monitor[i].img+`" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">`+json.monitor[i].name+`</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Type: `+json.monitor[i].type+`</li>
-                  <li class="list-group-item">Size: `+json.monitor[i].size+`</li>
-                  <li class="list-group-item">Price: `+json.monitor[i].price+`</li>
-                </ul>
-                <div class="card-body">
-                <button type="button" class="btn btn-success" value="`+[6,i]+`">Add</button>
-                </div>
-              </div>`
-          }
+        createCard(json.monitor[i].name,json.monitor[i].img,6,i,[`Type: ${json.monitor[i].type}`, `Size: ${json.monitor[i].size}`, `Price : ${json.monitor[i].price}` ]);
+      }
     })
 
     document.querySelector('#mouse').addEventListener('click', function(){
       let content = document.querySelector('#products');
       htmlclear();
       for(let i=0;i<json.ram.length;i++){
-      content.innerHTML += `
-              <div class="card" id="contentCard" style="width: 13rem";>
-                <img class="card-img-top" src="`+json.mouse[i].img+`" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">`+json.mouse[i].name+`</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Type: `+json.mouse[i].type+`</li>
-                  <li class="list-group-item">Type: `+json.mouse[i].typeSensor+`</li>
-                  <li class="list-group-item">Price: `+json.mouse[i].price+`</li>
-                </ul>
-                <div class="card-body">
-                <button type="button" class="btn btn-success" value="`+[7,i]+`">Add</button>
-                </div>
-              </div>`
+        createCard(json.mouse[i].name,json.mouse[i].img,7,i,[`Type: ${json.mouse[i].type}`, `Sensor type: ${json.mouse[i].typeSensor}`, `Price : ${json.mouse[i].price}` ]);
           }
     })
   
@@ -176,22 +104,8 @@ document.addEventListener('DOMContentLoaded', function(){
       let content = document.querySelector('#products');
       htmlclear();
       for(let i=0;i<json.ram.length;i++){
-      content.innerHTML += `
-              <div class="card" id="contentCard" style="width: 13rem";>
-                <img class="card-img-top" src="`+json.keyboard[i].img+`" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">`+json.keyboard[i].name+`</h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Type: `+json.keyboard[i].type+`</li>
-                  <li class="list-group-item">Type Connect: `+json.keyboard[i].typeconnect+`</li>
-                  <li class="list-group-item">Price: `+json.keyboard[i].price+`</li>
-                </ul>
-                <div class="card-body">
-                <button type="button" class="btn btn-success"value="`+[8,i]+`">Add</button>
-                </div>
-              </div>`
-          }
+        createCard(json.keyboard[i].name,json.keyboard[i].img,8,i,[`Type: ${json.keyboard[i].type}`, `Type Connector: ${json.keyboard[i].typeconnect}`, `Price : ${json.keyboard[i].price}` ]);
+      }
     })
 
     document.querySelector('#shopingCard').addEventListener('click', function(){
