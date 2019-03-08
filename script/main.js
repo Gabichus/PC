@@ -1,11 +1,12 @@
-var json = null;
+let json = null;
+let prod;
 window.onload = function(){
 	(async () => {
 	  const response = await fetch('script/components.json')
     json = await response.json()
     console.log(json)
   })()
-  var prod=['localcpu','localgpu','localmotherboard','localram','localrom','localmonitor','localmouse','localkeyboard'];
+  prod=['localcpu','localgpu','localmotherboard','localram','localrom','localmonitor','localmouse','localkeyboard'];
   
   for(i=0;i<8;i++){
     if(!localStorage.hasOwnProperty(prod[i])){
@@ -24,8 +25,7 @@ function createCard(title, img, elementNumber, i, ops){
   let opsHTML = "";
   ops.forEach(element => {
     opsHTML += `<li class="list-group-item"> ${element} </li> `;
-  });
-  
+});
   document.querySelector('#products').innerHTML += `
       <div class="card" id="contentCard" style="width: 13rem";>
         <img class="card-img-top" src="`+img+`" alt="Card image cap">
@@ -39,7 +39,30 @@ function createCard(title, img, elementNumber, i, ops){
         <button type="button" class="btn btn-success" value="`+[elementNumber,i]+`">Add</button>
         </div>
       </div>`;
-  }
+}
+
+
+
+function createTable(prodName,getJson){
+
+  document.querySelector('#shopingTable').innerHTML += `
+        <thead>
+          <tr>
+            <th scope="col" colspan="5" class="text-center">${prodName}</th>
+          </tr>
+        </thead>`
+        document.querySelector('#shopingTable').innerHTML += `
+        <tbody>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@fat</td>
+            <td>@fat</td>
+          </tr>
+        </tbody>
+      `   
+}
 
 document.addEventListener('DOMContentLoaded', function(){
   
@@ -109,25 +132,11 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 
     document.querySelector('#shopingCard').addEventListener('click', function(){
-      let content = document.querySelector('#shopingTable');
       htmlclear();
-      content.innerHTML += `
-        <thead>
-          <tr>
-            <th scope="col" colspan="5" class="text-center">Name</th>
-          </tr>
-        </thead>`
-        content.innerHTML += `
-        <tbody>
-          <tr>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-          </tr>
-        </tbody>
-      `     
+      for(i=0;i<=7;i++){ 
+        parsedJson=JSON.parse(localStorage.getItem(prod[i]));
+        if(parsedJson.length!=1) createTable(prod[i].slice(5),parsedJson);
+      }
     })
 
     document.addEventListener('click', function(){
@@ -167,7 +176,7 @@ function SaveDataToLocalStorage(localStorageType,data)
   parsedJson=JSON.parse(localStorage.getItem(localStorageType));
   SaveData=data;
   localForExist=localStorageType;
-  isNotNull().then(isExist).catch(ll);
+  isNotNull().then(isExist);
 }
 
 let isNotNull = function(){
@@ -191,18 +200,13 @@ let isExist= function(){
       if(parsedJson[i][0]==SaveData[0]) isExistBool=true;
     }
 		if(isExistBool){
-      console.log("este");
 			resolve('este');
     }else{
       var a = [];
       a = JSON.parse(localStorage.getItem(localForExist));
       a.push(SaveData);
       localStorage.setItem(localForExist, JSON.stringify(a));
-      console.log("nu este");
       reject('nu este');
     }
 	})
-}
-let ll=function(){
-  console.log("catch");
 }
