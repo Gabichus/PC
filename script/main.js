@@ -40,7 +40,6 @@ function createCard(title, img, elementNumber, i, ops){
         </div>
       </div>`;
 }
-//                                <input type="text" id="productCount" class="form-control text-center" style="width:3rem" placeholder="${prodElem[1]}" aria-label="Input quantity" aria-describedby="btnGroupAddon">
 
 function createTd(name,prodElem){
   elementTD="";
@@ -66,7 +65,7 @@ function createTd(name,prodElem){
    case 'gpu':elementTD +=`<tr><td>Name: ${json.gpu[prodElem[0]].name}</td>
                             <td>Frequence: ${json.gpu[prodElem[0]].frequence}</td>
                             <td>Memory: ${json.gpu[prodElem[0]].memory}</td>
-                            <td colspan="2">Price: ${json.gpu[prodElem[0]].price}</td>
+                            <td>Price: ${json.gpu[prodElem[0]].price}</td>
                             <td colspan="2">
                               <div class="btn-group" role="group" aria-label="Basic example">
                                 <button type="button" id="decrease" class="btn btn-secondary">-</button>
@@ -84,7 +83,19 @@ function createTd(name,prodElem){
     case 'motherboard':elementTD +=`<tr><td>Name: ${json.motherboard[prodElem[0]].name}</td>
                                     <td>Socket: ${json.motherboard[prodElem[0]].socket}</td>
                                     <td>Ram Type: ${json.motherboard[prodElem[0]].ramtype}</td>
-                                    <td colspan="2">Price: ${json.motherboard[prodElem[0]].price}</td>
+                                    <td>Price: ${json.motherboard[prodElem[0]].price}</td>
+                                    <td colspan="2">
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localmotherboard</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                                     </tr>`
       break;
     case 'ram':elementTD +=`<tr><td>Name: ${json.ram[prodElem[0]].name}</td>
@@ -92,6 +103,18 @@ function createTd(name,prodElem){
                             <td>Capacity: ${json.ram[prodElem[0]].capacity}</td>
                             <td>Frequence: ${json.ram[prodElem[0]].frequence}</td>
                             <td>Price: ${json.ram[prodElem[0]].price}</td>
+                            <td>
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localram</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                             </tr>`
       break;
     case 'rom':elementTD +=`<tr><td>Name: ${json.rom[prodElem[0]].name}</td>
@@ -99,24 +122,72 @@ function createTd(name,prodElem){
                             <td>Capacity: ${json.rom[prodElem[0]].capacity}</td>
                             <td>Speed: ${json.rom[prodElem[0]].speed}</td>
                             <td>Price: ${json.rom[prodElem[0]].price}</td>
+                            <td>
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localrom</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                             </tr>`
       break;
     case 'monitor':elementTD +=`<tr><td>Name: ${json.monitor[prodElem[0]].name}</td>
                                 <td>Type: ${json.monitor[prodElem[0]].type}</td>
                                 <td>Capacity: ${json.monitor[prodElem[0]].size}</td>
                                 <td colspan="2">Price: ${json.monitor[prodElem[0]].price}</td>
+                                <td colspan="2">
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localmonitor</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                                 </tr>`
       break;
     case 'mouse':elementTD +=`<tr><td>Name: ${json.mouse[prodElem[0]].name}</td>
                               <td>Type: ${json.mouse[prodElem[0]].type}</td>
                               <td>Type Sensor: ${json.mouse[prodElem[0]].typeSensor}</td>
                               <td colspan="2">Price: ${json.mouse[prodElem[0]].price}</td>
+                              <td colspan="2">
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localmouse</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                               </tr>`
       break;
     case 'keyboard':elementTD +=`<tr><td>Name: ${json.keyboard[prodElem[0]].name}</td>
                                 <td>Type: ${json.keyboard[prodElem[0]].type}</td>
                                 <td>Type Connector: ${json.keyboard[prodElem[0]].typeconnect}</td>
                                 <td colspan="2" >Price: ${json.keyboard[prodElem[0]].price}</td>
+                                <td colspan="2">
+                                      <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
+                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
+                                      </div> 
+                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
+                                      <div class="d-none">
+                                        <p id="localKey">localkeyboard</p>
+                                        <p id="findKey">${prodElem}</p>
+                                      </div>
+                                    </td>
                                 </tr>`
       break;
   }
@@ -247,12 +318,34 @@ document.addEventListener('DOMContentLoaded', function(){
       if(e.target['id']=='increase'){
         let count=e.target.parentElement.querySelector('#productCount');
         count.innerHTML=parseInt(count.innerHTML)+1
+
+        localKey=e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
+          findKey=e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
+          parsedJson=JSON.parse(localStorage.getItem(localKey));
+          for(i=1; i<parsedJson.length; i++){
+            if(parsedJson[i][0]==findKey[0]) 
+            {
+              parsedJson[i][1]+=1;
+              localStorage.setItem(localKey, JSON.stringify(parsedJson));
+            }
+          }
       }
 
       if(e.target['id']=='decrease'){
         let count=e.target.parentElement.querySelector('#productCount');
         if(parseInt(count.innerHTML)>1){
-          count.innerHTML=parseInt(count.innerHTML)-1
+          count.innerHTML=parseInt(count.innerHTML)-1;
+
+          localKey=e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
+          findKey=e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
+          parsedJson=JSON.parse(localStorage.getItem(localKey));
+          for(i=1; i<parsedJson.length; i++){
+            if(parsedJson[i][0]==findKey[0]) 
+            {
+              parsedJson[i][1]-=1;
+              localStorage.setItem(localKey, JSON.stringify(parsedJson));
+            }
+          }
         }
       }
       
@@ -261,10 +354,13 @@ document.addEventListener('DOMContentLoaded', function(){
         let findKey=e.target.parentElement.querySelector('#findKey').innerHTML;
         parsedJson=JSON.parse(localStorage.getItem(localKey));
         for(i=1; i<parsedJson.length; i++){
-          if(parsedJson[i][0]==findKey[0]) parsedJson.splice(i,1);
+          if(parsedJson[i][0]==findKey[0]) 
+          {
+            parsedJson.splice(i,1);
+            localStorage.setItem(localKey, JSON.stringify(parsedJson));
+          }
         }
         console.log(parsedJson);
-        localStorage.setItem(localKey, JSON.stringify(parsedJson));
       }
     })
 })
