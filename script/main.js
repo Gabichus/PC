@@ -4,7 +4,7 @@ window.onload = function () {
   (async () => {
     const response = await fetch('script/components.json')
     json = await response.json()
-    console.log(json)
+    console.log(json);
   })()
   prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard'];
 
@@ -74,7 +74,7 @@ function createTd(name, prodElem) {
       break;
     case 'gpu': elementTD += insertTdElement([`Name: ${json.gpu[prodElem[0]].name}`, `Frequence: ${json.gpu[prodElem[0]].frequence}`, `Memory: ${json.gpu[prodElem[0]].memory}`, `Price: ${json.gpu[prodElem[0]].price}`], "localgpu", prodElem);
       break;
-    case 'motherboard':elementTD += insertTdElement([`Name: ${json.motherboard[prodElem[0]].name}`, `Socket: ${json.motherboard[prodElem[0]].socket}`, `Ram Type: ${json.motherboard[prodElem[0]].ramtype}`, `Price: ${json.motherboard[prodElem[0]].price}`], "localmotherboard", prodElem);
+    case 'motherboard': elementTD += insertTdElement([`Name: ${json.motherboard[prodElem[0]].name}`, `Socket: ${json.motherboard[prodElem[0]].socket}`, `Ram Type: ${json.motherboard[prodElem[0]].ramtype}`, `Price: ${json.motherboard[prodElem[0]].price}`], "localmotherboard", prodElem);
       break;
     case 'ram': elementTD += insertTdElement([`Name: ${json.ram[prodElem[0]].name}`, `Type: ${json.ram[prodElem[0]].type}`, `Capacity: ${json.ram[prodElem[0]].capacity}`, `Price: ${json.ram[prodElem[0]].price}`], "localram", prodElem);
       break;
@@ -82,7 +82,7 @@ function createTd(name, prodElem) {
       break;
     case 'monitor': elementTD += insertTdElement([`Name: ${json.monitor[prodElem[0]].name}`, `Type: ${json.monitor[prodElem[0]].type}`, `Ram Type: ${json.monitor[prodElem[0]].size}`, `Price: ${json.monitor[prodElem[0]].price}`], "localmonitor", prodElem);
       break;
-    case 'mouse': elementTD +=  insertTdElement([`Name: ${json.mouse[prodElem[0]].name}`, `Type: ${json.mouse[prodElem[0]].type}`, `Type Sensor: ${json.mouse[prodElem[0]].typeSensor}`, `Price: ${json.mouse[prodElem[0]].price}`], "localmouse", prodElem);
+    case 'mouse': elementTD += insertTdElement([`Name: ${json.mouse[prodElem[0]].name}`, `Type: ${json.mouse[prodElem[0]].type}`, `Type Sensor: ${json.mouse[prodElem[0]].typeSensor}`, `Price: ${json.mouse[prodElem[0]].price}`], "localmouse", prodElem);
       break;
     case 'keyboard': elementTD += insertTdElement([`Name: ${json.keyboard[prodElem[0]].name}`, `Type: ${json.keyboard[prodElem[0]].type}`, `Ram Type: ${json.keyboard[prodElem[0]].typeConnect}`, `Price: ${json.keyboard[prodElem[0]].price}`], "localkeyboard", prodElem);
       break;
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#cpu').addEventListener('click', function () {
     let content = document.querySelector('#products');
     htmlclear();
-    for (let i = 0; i < json.gpu.length; i++) {
+    for (let i = 0; i < json.cpu.length; i++) {
       createCard(json.cpu[i].name, json.cpu[i].img, 1, i, [`Frequence: ${json.cpu[i].frequence}`, `Socket: ${json.cpu[i].socket}`, `Price : ${json.cpu[i].price}`]);
     }
   })

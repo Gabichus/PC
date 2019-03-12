@@ -8,14 +8,42 @@
             "price":250,
             "img":"../assets/cpu1.jpg"
          },
-             
         {
             "name":"i7 4770k",
             "frequence":"4GHz",
             "socket":1150,
             "price":350,
             "img":"../assets/cpu2.jpg"
+         },
+         {
+             "name":"i5 8600k",
+             "frequence":"4.3Ghz",
+             "socket":1151,
+             "price":258,
+             "img":"../assets/cpu3.jpg"
+         },
+         {
+             "name":"i3 8100",
+             "frequence":"3.6Ghz",
+             "socket":1151,
+             "price":117,
+             "img":"../assets/cpu4.jpg"
+         },
+         {
+             "name":"Xeon X5650",
+             "frequence":"3.2Ghz",
+             "socket":1366,
+             "price":1000,
+             "img":"../assets/cpu5.jpg"
+         },
+         {
+             "name":"Xeon e5450",
+             "frequence":"3.3Ghz",
+             "socket":1366,
+             "price":1443,
+             "img":"../assets/cpu6.jpg"
          }
+
     ],
     "gpu":
     [
@@ -53,6 +81,33 @@
              "ramtype":"ddr3",
              "price":125,
              "img":"../assets/moth2.jpg"
+         },
+         {
+             "name":"Asus Prime H310M-K",
+             "socket":1151,
+             "memoryslot":2,
+             "gpuslot":1,
+             "ramtype":"ddr4",
+             "price":70,
+             "img":"../assets/moth3.jpg"
+         },
+         {
+             "name":"Asus ROG Strix",
+             "socket":1151,
+             "memoryslot":4,
+             "gpuslot":2,
+             "ramtype":"ddr4",
+             "price":220,
+             "img":"../assets/moth4.jpg"
+         },
+         {
+             "name":"dell t3500",
+             "socket":1366,
+             "memoryslot":12,
+             "gpuslot":1,
+             "ramtype":"ddr3",
+             "price":500,
+             "img":"../assets/moth5.jpg"
          }
     ],
     "ram":
@@ -72,6 +127,22 @@
             "frequence":"1600Mhz",
             "price":50,
             "img":"../assets/ram2.jpg"
+        },
+        {
+            "name":"Kingston HyperX FURY",
+            "type":"ddr4",
+            "capacity":"8gb",
+            "frequence":"2400Mhz",
+            "price":100,
+            "img":"../assets/ram3.jpg"
+        },
+        {
+            "name":"Corsair Vengeance LPX Red",
+            "type":"ddr4",
+            "capacity":"16gb",
+            "frequence":"2133Mhz",
+            "price":120,
+            "img":"../assets/ram4.jpg"
         }
     ],
     "rom":[
