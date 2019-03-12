@@ -128,14 +128,14 @@
         {
             "name":"LOGITECH G512",
             "type":"mechanics",
-            "typeconnect":"usb",
+            "typeConnect":"usb",
             "price":90,
             "img":"../assets/keyboard1.jpg"
         },
         {
             "name":"HyperX Alloy FPS PRO",
             "type":"mechanics",
-            "typeconnect":"usb",
+            "typeConnect":"usb",
             "price":120,
             "img":"../assets/keyboard2.jpg"
         }

@@ -41,10 +41,13 @@ function createCard(title, img, elementNumber, i, ops) {
         </div>
       </div>`;
 }
+
 function insertTdElement(elem, localkey, prodElem) {
+  opsHTML = "";
   elem.forEach(element => {
     opsHTML += `<td>${element}</td>`
   });
+  console.log(opsHTML);
   opsHTML = `<tr>
             ${opsHTML}
             <td colspan="2">
@@ -60,138 +63,28 @@ function insertTdElement(elem, localkey, prodElem) {
               </div>
             </td>
         </tr>`
+
+  return opsHTML;
 }
 
 function createTd(name, prodElem) {
   elementTD = "";
   switch (name) {
-    case 'cpu': elementTD += insertTdElement([`Name: ${json.cpu[prodElem[0]].name}`], "localcpu", prodElem)
+    case 'cpu': elementTD += insertTdElement([`Name: ${json.cpu[prodElem[0]].name}`, `Frequence: ${json.cpu[prodElem[0]].frequence}`, `Socket: ${json.cpu[prodElem[0]].socket}`, `Price: ${json.cpu[prodElem[0]].price}`], "localcpu", prodElem);
       break;
-    case 'gpu': elementTD += `<tr><td>Name: ${json.gpu[prodElem[0]].name}</td>
-                            <td>Frequence: ${json.gpu[prodElem[0]].frequence}</td>
-                            <td>Memory: ${json.gpu[prodElem[0]].memory}</td>
-                            <td>Price: ${json.gpu[prodElem[0]].price}</td>
-                            <td colspan="2">
-                              <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                <button type="button" id="increase" class="btn btn-secondary">+</button>
-                              </div> 
-                              <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                              <div class="d-none">
-                                <p id="localKey">localgpu</p>
-                                <p id="findKey">${prodElem}</p>
-                              </div>
-                            </td>
-                            </tr>`
+    case 'gpu': elementTD += insertTdElement([`Name: ${json.gpu[prodElem[0]].name}`, `Frequence: ${json.gpu[prodElem[0]].frequence}`, `Memory: ${json.gpu[prodElem[0]].memory}`, `Price: ${json.gpu[prodElem[0]].price}`], "localgpu", prodElem);
       break;
-    case 'motherboard': elementTD += `<tr><td>Name: ${json.motherboard[prodElem[0]].name}</td>
-                                    <td>Socket: ${json.motherboard[prodElem[0]].socket}</td>
-                                    <td>Ram Type: ${json.motherboard[prodElem[0]].ramtype}</td>
-                                    <td>Price: ${json.motherboard[prodElem[0]].price}</td>
-                                    <td colspan="2">
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localmotherboard</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                    </td>
-                                    </tr>`
+    case 'motherboard':elementTD += insertTdElement([`Name: ${json.motherboard[prodElem[0]].name}`, `Socket: ${json.motherboard[prodElem[0]].socket}`, `Ram Type: ${json.motherboard[prodElem[0]].ramtype}`, `Price: ${json.motherboard[prodElem[0]].price}`], "localmotherboard", prodElem);
       break;
-    case 'ram': elementTD += `<tr><td>Name: ${json.ram[prodElem[0]].name}</td>
-                            <td>Type: ${json.ram[prodElem[0]].type}</td>
-                            <td>Capacity: ${json.ram[prodElem[0]].capacity}</td>
-                            <td colspan="2">Price: ${json.ram[prodElem[0]].price}</td>
-                            <td>
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localram</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                    </td>
-                            </tr>`
+    case 'ram': elementTD += insertTdElement([`Name: ${json.ram[prodElem[0]].name}`, `Type: ${json.ram[prodElem[0]].type}`, `Capacity: ${json.ram[prodElem[0]].capacity}`, `Price: ${json.ram[prodElem[0]].price}`], "localram", prodElem);
       break;
-    case 'rom': elementTD += `<tr><td>Name: ${json.rom[prodElem[0]].name}</td>
-                            <td>Type: ${json.rom[prodElem[0]].type}</td>
-                            <td>Capacity: ${json.rom[prodElem[0]].capacity}</td>
-                            <td colspan="2">Price: ${json.rom[prodElem[0]].price}</td>
-                            <td>
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localrom</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                    </td>
-                            </tr>`
+    case 'rom': elementTD += insertTdElement([`Name: ${json.rom[prodElem[0]].name}`, `Type: ${json.rom[prodElem[0]].type}`, `Speed: ${json.rom[prodElem[0]].speed}`, `Price: ${json.rom[prodElem[0]].price}`], "localrom", prodElem);
       break;
-    case 'monitor': elementTD += `<tr><td>Name: ${json.monitor[prodElem[0]].name}</td>
-                                <td>Type: ${json.monitor[prodElem[0]].type}</td>
-                                <td>Capacity: ${json.monitor[prodElem[0]].size}</td>
-                                <td colspan="2">Price: ${json.monitor[prodElem[0]].price}</td>
-                                <td colspan="2">
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localmonitor</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                    </td>
-                                </tr>`
+    case 'monitor': elementTD += insertTdElement([`Name: ${json.monitor[prodElem[0]].name}`, `Type: ${json.monitor[prodElem[0]].type}`, `Ram Type: ${json.monitor[prodElem[0]].size}`, `Price: ${json.monitor[prodElem[0]].price}`], "localmonitor", prodElem);
       break;
-    case 'mouse': elementTD += `<tr><td>Name: ${json.mouse[prodElem[0]].name}</td>
-                              <td>Type: ${json.mouse[prodElem[0]].type}</td>
-                              <td>Type Sensor: ${json.mouse[prodElem[0]].typeSensor}</td>
-                              <td colspan="2">Price: ${json.mouse[prodElem[0]].price}</td>
-                              <td colspan="2">
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localmouse</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                    </td>
-                              </tr>`
+    case 'mouse': elementTD +=  insertTdElement([`Name: ${json.mouse[prodElem[0]].name}`, `Type: ${json.mouse[prodElem[0]].type}`, `Type Sensor: ${json.mouse[prodElem[0]].typeSensor}`, `Price: ${json.mouse[prodElem[0]].price}`], "localmouse", prodElem);
       break;
-    case 'keyboard': elementTD += `<tr><td>Name: ${json.keyboard[prodElem[0]].name}</td>
-                                <td>Type: ${json.keyboard[prodElem[0]].type}</td>
-                                <td>Type Connector: ${json.keyboard[prodElem[0]].typeconnect}</td>
-                                <td colspan="2" >Price: ${json.keyboard[prodElem[0]].price}</td>
-                                <td colspan="2">
-                                      <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" id="decrease" class="btn btn-secondary">-</button>
-                                        <span class="input-group-text" id="productCount">${prodElem[1]}</span>
-                                        <button type="button" id="increase" class="btn btn-secondary">+</button>
-                                      </div> 
-                                      <button type="button" id="removeProduct" class="btn btn-danger">Remove</button>
-                                      <div class="d-none">
-                                        <p id="localKey">localkeyboard</p>
-                                        <p id="findKey">${prodElem}</p>
-                                      </div>
-                                  </td>
-                                </tr>`
+    case 'keyboard': elementTD += insertTdElement([`Name: ${json.keyboard[prodElem[0]].name}`, `Type: ${json.keyboard[prodElem[0]].type}`, `Ram Type: ${json.keyboard[prodElem[0]].typeConnect}`, `Price: ${json.keyboard[prodElem[0]].price}`], "localkeyboard", prodElem);
       break;
   }
   return elementTD;
@@ -200,7 +93,6 @@ function createTd(name, prodElem) {
 function createTable(prodName, getProd) {
   opsHTML = "";
   getProd.forEach(element => {
-    console.log(element);
     if (element != null) opsHTML += createTd(prodName, element);
   });
 
@@ -280,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let content = document.querySelector('#products');
     htmlclear();
     for (let i = 0; i < json.ram.length; i++) {
-      createCard(json.keyboard[i].name, json.keyboard[i].img, 8, i, [`Type: ${json.keyboard[i].type}`, `Type Connector: ${json.keyboard[i].typeconnect}`, `Price : ${json.keyboard[i].price}`]);
+      createCard(json.keyboard[i].name, json.keyboard[i].img, 8, i, [`Type: ${json.keyboard[i].type}`, `Type Connector: ${json.keyboard[i].typeConnect}`, `Price : ${json.keyboard[i].price}`]);
     }
   })
 
