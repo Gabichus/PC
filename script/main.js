@@ -45,7 +45,9 @@ function createCard(title, img, elementNumber, i, ops) {
 function insertTdElement(elem, localkey, prodElem) {
   opsHTML = "";
   elem.forEach(element => {
-    opsHTML += `<td>${element}</td>`
+    if(element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}>${element}</td>`;
+    else opsHTML += `<td>${element}</td>`
+    
   });
   opsHTML = `<tr>
             ${opsHTML}
@@ -154,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#monitor').addEventListener('click', function () {
     let content = document.querySelector('#products');
     htmlclear();
-    for (let i = 0; i < json.ram.length; i++) {
+    for (let i = 0; i < json.monitor.length; i++) {
       createCard(json.monitor[i].name, json.monitor[i].img, 6, i, [`Type: ${json.monitor[i].type}`, `Size: ${json.monitor[i].size}`, `Price : ${json.monitor[i].price}`]);
     }
   })
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#mouse').addEventListener('click', function () {
     let content = document.querySelector('#products');
     htmlclear();
-    for (let i = 0; i < json.ram.length; i++) {
+    for (let i = 0; i < json.mouse.length; i++) {
       createCard(json.mouse[i].name, json.mouse[i].img, 7, i, [`Type: ${json.mouse[i].type}`, `Sensor type: ${json.mouse[i].typeSensor}`, `Price : ${json.mouse[i].price}`]);
     }
   })
@@ -170,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#keyboard').addEventListener('click', function () {
     let content = document.querySelector('#products');
     htmlclear();
-    for (let i = 0; i < json.ram.length; i++) {
+    for (let i = 0; i < json.keyboard.length; i++) {
       createCard(json.keyboard[i].name, json.keyboard[i].img, 8, i, [`Type: ${json.keyboard[i].type}`, `Type Connector: ${json.keyboard[i].typeConnect}`, `Price : ${json.keyboard[i].price}`]);
     }
   })
@@ -210,10 +212,19 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   document.addEventListener('click', function (e) {
+
+    let count = document.querySelectorAll('#itemPrice');
+    count.forEach(element => {
+        //console.log(element.innerHTML.slice(7))
+      });
+
+
     if (e.target['id'] == 'increase') {
       let count = e.target.parentElement.querySelector('#productCount');
       count.innerHTML = parseInt(count.innerHTML) + 1
-
+      console.log(e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice')['id'])
+      let tempPrice=parseInt(e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML.slice(7));
+      e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML="Price: " 
       localKey = e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
       findKey = e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
       parsedJson = JSON.parse(localStorage.getItem(localKey));
@@ -229,7 +240,6 @@ document.addEventListener('DOMContentLoaded', function () {
       let count = e.target.parentElement.querySelector('#productCount');
       if (parseInt(count.innerHTML) > 1) {
         count.innerHTML = parseInt(count.innerHTML) - 1;
-
         localKey = e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
         findKey = e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
         parsedJson = JSON.parse(localStorage.getItem(localKey));
