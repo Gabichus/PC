@@ -45,9 +45,9 @@ function createCard(title, img, elementNumber, i, ops) {
 function insertTdElement(elem, localkey, prodElem) {
   opsHTML = "";
   elem.forEach(element => {
-    if(element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}>${element}</td>`;
+    if (element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}><div id="price" class="d-none">${element.slice(7)}</div>Price: ${(element.slice(7) * prodElem[1])}</td>`;
     else opsHTML += `<td>${element}</td>`
-    
+
   });
   opsHTML = `<tr>
             ${opsHTML}
@@ -215,16 +215,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let count = document.querySelectorAll('#itemPrice');
     count.forEach(element => {
-        //console.log(element.innerHTML.slice(7))
-      });
+      //console.log(element.innerHTML.slice(7))
+    });
 
 
     if (e.target['id'] == 'increase') {
       let count = e.target.parentElement.querySelector('#productCount');
-      count.innerHTML = parseInt(count.innerHTML) + 1
-      console.log(e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice')['id'])
-      let tempPrice=parseInt(e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML.slice(7));
-      e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML="Price: " 
+      count.innerHTML = parseInt(count.innerHTML) + 1;
+      let price = e.target.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
+      e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML = `<div id="price" class="d-none">${price}</div>
+      Price: ` + parseInt(price) * parseInt(count.innerHTML);
       localKey = e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
       findKey = e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
       parsedJson = JSON.parse(localStorage.getItem(localKey));
@@ -240,6 +240,9 @@ document.addEventListener('DOMContentLoaded', function () {
       let count = e.target.parentElement.querySelector('#productCount');
       if (parseInt(count.innerHTML) > 1) {
         count.innerHTML = parseInt(count.innerHTML) - 1;
+        let price = e.target.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
+        e.target.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML = `<div id="price" class="d-none">${price}</div>
+        Price: ` + parseInt(price) * parseInt(count.innerHTML);
         localKey = e.target.parentElement.parentElement.querySelector('#localkey').innerHTML;
         findKey = e.target.parentElement.parentElement.querySelector('#findKey').innerHTML;
         parsedJson = JSON.parse(localStorage.getItem(localKey));
