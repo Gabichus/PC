@@ -66,6 +66,7 @@
     [
          {
              "name":"asus z97k",
+             "socketNumber":1,
              "socket":1150,
              "memoryslot":4,
              "gpuslot":1,
@@ -75,6 +76,7 @@
          },
          {
              "name":"GA-H81M-S1",
+             "socketNumber":1,
              "socket":1150,
              "memoryslot":2,
              "gpuslot":1,
@@ -84,6 +86,7 @@
          },
          {
              "name":"Asus Prime H310M-K",
+             "socketNumber":1,
              "socket":1151,
              "memoryslot":2,
              "gpuslot":1,
@@ -93,6 +96,7 @@
          },
          {
              "name":"Asus ROG Strix",
+             "socketNumber":1,
              "socket":1151,
              "memoryslot":4,
              "gpuslot":2,
@@ -102,6 +106,7 @@
          },
          {
              "name":"dell t3500",
+             "socketNumber":2,
              "socket":1366,
              "memoryslot":12,
              "gpuslot":1,

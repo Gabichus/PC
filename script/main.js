@@ -47,7 +47,6 @@ function insertTdElement(elem, localkey, prodElem) {
   elem.forEach(element => {
     opsHTML += `<td>${element}</td>`
   });
-  console.log(opsHTML);
   opsHTML = `<tr>
             ${opsHTML}
             <td colspan="2">
