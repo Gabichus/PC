@@ -72,7 +72,4 @@ setTimeout(function () {
 
     }
 
-    let h=new pc();
-    h.checkStart();
-
 }, 500)
