@@ -14,6 +14,10 @@ class PcConstructor {
         }
     }
 
+    getJson() {
+        return this.json;
+    }
+
     htmlclear() {
         document.querySelector('#products').innerHTML = ``;
         document.querySelector('#shopingTable').innerHTML = ``;
@@ -103,16 +107,29 @@ class PcConstructor {
         }
     }
 
+    createClassPc(){
+        let c = new pc();
+        c.checkStart();
+    }
+
+    calcPrice(){
+        let allprice=0;
+        let count = document.querySelectorAll('#itemPrice');
+        for(let i=0;i<count.length;i++) allprice+=parseInt(count[i].textContent.slice(10));
+        document.querySelector('#allPrice').innerHTML=`Total Price: ${allprice}`;
+    }
+
     createTable() {
         let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard'];
+        let check = true;
         this.htmlclear();
         for (let i = 0; i <= 7; i++) {
             let parsedJson = JSON.parse(localStorage.getItem(prod[i]));
             if (parsedJson.length > 0) {
                 let opsHTML = "";
-                // parsedJson.forEach(element => {
-                //     if (element != null) opsHTML += createTd(prodName, element);
-                // });
+                parsedJson.forEach(element => {
+                    if (element != null) opsHTML += this.createTd(prod[i].slice(5), element);
+                });
 
                 document.querySelector('#shopingTable').innerHTML += `
                 <thead>
@@ -120,13 +137,138 @@ class PcConstructor {
                     <th scope="col" colspan="6" class="text-center">${prod[i].slice(5)}</th>
                 </tr>
                 </thead>`
-                        document.querySelector('#shopingTable').innerHTML += `
+                document.querySelector('#shopingTable').innerHTML += `
                 <tbody>
                     ${opsHTML}
                 </tbody>
                 `
             }
         }
+
+        let shopingTable = document.querySelector('#shopingTable');
+        if (shopingTable.innerHTML != "") {
+            shopingTable.innerHTML += `
+                            <td colspan="3">
+                             <div id="allPrice"></div>
+                            </td>
+                            <td colspan="1">
+                                <div class="input-group flex-nowrap">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">discount</span>
+                                    </div>
+                                    <input type="text" class="form-control"  id="discountInput">
+                                </div>
+                            </td>
+                            <td colspan="2">
+                            <button type="button" class="btn btn-success" onclick="h.createClassPc()">Create PC</button>
+                            </td>`
+                            this.calcPrice();
+        }
+
+    }
+    createTd(name, prodElem) {
+        let elementTD = "";
+        switch (name) {
+            case 'cpu': elementTD += this.insertTdElement([`Name: ${this.json.cpu[prodElem[0]].name}`, `Frequence: ${this.json.cpu[prodElem[0]].frequence}`, `Socket: ${this.json.cpu[prodElem[0]].socket}`, `Price: ${this.json.cpu[prodElem[0]].price}`], "localcpu", prodElem);
+                break;
+            case 'gpu': elementTD += this.insertTdElement([`Name: ${this.json.gpu[prodElem[0]].name}`, `Frequence: ${this.json.gpu[prodElem[0]].frequence}`, `Memory: ${this.json.gpu[prodElem[0]].memory}`, `Price: ${this.json.gpu[prodElem[0]].price}`], "localgpu", prodElem);
+                break;
+            case 'motherboard': elementTD += this.insertTdElement([`Name: ${this.json.motherboard[prodElem[0]].name}`, `Socket: ${this.json.motherboard[prodElem[0]].socket}`, `Ram Type: ${this.json.motherboard[prodElem[0]].ramtype}`, `Price: ${this.json.motherboard[prodElem[0]].price}`], "localmotherboard", prodElem);
+                break;
+            case 'ram': elementTD += this.insertTdElement([`Name: ${this.json.ram[prodElem[0]].name}`, `Type: ${this.json.ram[prodElem[0]].type}`, `Capacity: ${this.json.ram[prodElem[0]].capacity}`, `Price: ${this.json.ram[prodElem[0]].price}`], "localram", prodElem);
+                break;
+            case 'rom': elementTD += this.insertTdElement([`Name: ${this.json.rom[prodElem[0]].name}`, `Type: ${this.json.rom[prodElem[0]].type}`, `Speed: ${this.json.rom[prodElem[0]].speed}`, `Price: ${this.json.rom[prodElem[0]].price}`], "localrom", prodElem);
+                break;
+            case 'monitor': elementTD += this.insertTdElement([`Name: ${this.json.monitor[prodElem[0]].name}`, `Type: ${this.json.monitor[prodElem[0]].type}`, `Ram Type: ${this.json.monitor[prodElem[0]].size}`, `Price: ${this.json.monitor[prodElem[0]].price}`], "localmonitor", prodElem);
+                break;
+            case 'mouse': elementTD += this.insertTdElement([`Name: ${this.json.mouse[prodElem[0]].name}`, `Type: ${this.json.mouse[prodElem[0]].type}`, `Type Sensor: ${this.json.mouse[prodElem[0]].typeSensor}`, `Price: ${this.json.mouse[prodElem[0]].price}`], "localmouse", prodElem);
+                break;
+            case 'keyboard': elementTD += this.insertTdElement([`Name: ${this.json.keyboard[prodElem[0]].name}`, `Type: ${this.json.keyboard[prodElem[0]].type}`, `Ram Type: ${this.json.keyboard[prodElem[0]].typeConnect}`, `Price: ${this.json.keyboard[prodElem[0]].price}`], "localkeyboard", prodElem);
+                break;
+        }
+        return elementTD;
+    }
+    insertTdElement(elem, localkey, prodElem) {
+        let opsHTML = "";
+        elem.forEach(element => {
+            if (element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}><div id="price" class="d-none">${element.slice(7)}</div>Price: ${(element.slice(7) * prodElem[1])}</td>`;
+            else opsHTML += `<td>${element}</td>`
+
+        });
+        opsHTML = `<tr>
+                  ${opsHTML}
+                  <td colspan="2">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" id="decrease" class="btn btn-secondary" onclick="h.decrease('${localkey}',[${prodElem}],this)">-</button>
+                      <span class="input-group-text" id="productCount">${prodElem[1]}</span>
+                      <button type="button" id="increase" class="btn btn-secondary" onclick="h.increase('${localkey}',[${prodElem}],this)">+</button>
+                    </div> 
+                    <button type="button" id="removeProduct" class="btn btn-danger" onclick="h.remove('${localkey}',[${prodElem}],this)">Remove</button>
+                    <div class="d-none">
+                      <p id="localKey">${localkey}</p>
+                      <p id="findKey">${prodElem}</p>
+                    </div>
+                  </td>
+              </tr>`
+
+        return opsHTML;
+    }
+    increase(localKey, prodElem, productCount) {
+        let parsedJson = JSON.parse(localStorage.getItem(localKey));
+        let price = productCount.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
+        for (let i = 0; i < parsedJson.length; i++) {
+            if (parsedJson[i][0] == prodElem[0]) {
+                parsedJson[i][1] += 1;
+                localStorage.setItem(localKey, JSON.stringify(parsedJson));
+                productCount.parentElement.querySelector('#productCount').innerHTML = parseInt(productCount.parentElement.querySelector('#productCount').innerHTML) + 1
+                productCount.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML = `<div id="price" class="d-none">${price}</div> Price: ` + parseInt(price) * parseInt(productCount.parentElement.querySelector('#productCount').innerHTML);
+                this.calcPrice();
+            }
+        }
+    }
+    decrease(localKey, prodElem, productCount) {
+        let parsedJson = JSON.parse(localStorage.getItem(localKey));
+        let price = productCount.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
+        for (let i = 0; i < parsedJson.length; i++) {
+            if (parsedJson[i][0] == prodElem[0] && parsedJson[i][1] - 1 > 0) {
+                parsedJson[i][1] -= 1;
+                localStorage.setItem(localKey, JSON.stringify(parsedJson));
+                productCount.parentElement.querySelector('#productCount').innerHTML = parseInt(productCount.parentElement.querySelector('#productCount').innerHTML) - 1
+                productCount.parentElement.parentElement.parentElement.querySelector('#itemPrice').innerHTML = `<div id="price" class="d-none">${price}</div> Price: ` + parseInt(price) * parseInt(productCount.parentElement.querySelector('#productCount').innerHTML);
+                this.calcPrice();
+            }
+        }
+    }
+    remove(localKey, prodElem, productCount) {
+        let parsedJson = JSON.parse(localStorage.getItem(localKey));
+        let price = productCount.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
+        for (let i = 0; i < parsedJson.length; i++) {
+            if (parsedJson[i][0] == prodElem[0]) {
+                parsedJson.splice(i, 1);
+                localStorage.setItem(localKey, JSON.stringify(parsedJson));
+                productCount.parentElement.parentElement.remove();
+                this.calcPrice();
+            }
+        }
+    }
+    createModal(price){
+        this.htmlclear();
+        document.querySelector('#products').innerHTML +=`
+        <form>
+        <div class="form-group">
+          <label for="Name">Name Surname</label>
+          <input type="Name" class="form-control" id="NameSurname" placeholder="Enter Name Surname">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="Email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputAddres">Addres</label>
+          <input type="password" class="form-control" id="Addres" placeholder="Enter Addres">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="alert()">Submit</button>
+      </form> `
     }
 }
 let h = new PcConstructor();

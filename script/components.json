@@ -215,6 +215,20 @@
             "price":120,
             "img":"../assets/keyboard2.jpg"
         }
+    ],
+    "discount":[
+        {
+            "procent":1,
+            "cod":123
+        },
+        {
+            "procent":5,
+            "cod":1234
+        },
+        {
+            "procent":10,
+            "cod":12345
+        }
     ]
 
     
