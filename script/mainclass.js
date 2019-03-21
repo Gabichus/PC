@@ -267,8 +267,18 @@ class PcConstructor {
           <label for="exampleInputAddres">Addres</label>
           <input type="password" class="form-control" id="Addres" placeholder="Enter Addres">
         </div>
-        <button type="submit" class="btn btn-primary" onclick="alert()">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="h.checkModal()">Submit</button>
       </form> `
+    }
+
+    checkModal(){
+        if(document.querySelector('#NameSurname').innerHTML!="") {
+            if(!document.querySelector('#Email').value.includes("@")) alert("Email incorect"){
+                alert();
+            }
+        }
+        else alert("Introduceti numele")
+        
     }
 }
 let h = new PcConstructor();
