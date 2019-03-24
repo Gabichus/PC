@@ -61,6 +61,13 @@ class pc {
         } else console.log("Memoria Ram nu este aleasa");
     }
 
+    saveShopingCart(){
+        let tr=document.querySelectorAll('#Name');
+        let nameProductList=[];
+        for(let i = 0; i<tr.length;i++) nameProductList.push(tr[i].textContent.slice(6));
+        return nameProductList;
+    }
+
     checkDiscount() {
         let check = false;
         let discountProcent = 0;
@@ -80,7 +87,9 @@ class pc {
                 alert("Cod Gresit")
                 discInput = "";
             }
-            else h.createModal(price);
+            else{
+                 h.createModal(price,this.saveShopingCart());
+                }
         }
     }
 

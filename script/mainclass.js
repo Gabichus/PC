@@ -5,13 +5,14 @@ class PcConstructor {
             this.json = await response.json()
         })()
 
-        let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard'];
+        let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard','localBuyer'];
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 9; i++) {
             if (!localStorage.hasOwnProperty(prod[i])) {
-                localStorage.setItem(prod[i], JSON.stringify([]));
-            }
+                localStorage.setItem(prod[i], JSON.stringify([]));            }
         }
+        this.price=0;
+        this.nameProductList=[];
     }
 
     getJson() {
@@ -107,6 +108,16 @@ class PcConstructor {
         }
     }
 
+    addToLocalStorageBuyer(name,mail,addres){
+        let b=[];
+        b.push(name);
+        b.push(mail);
+        b.push(addres);
+        b.push(this.price);
+        b.push(this.nameProductList);
+        localStorage.setItem('localBuyer', JSON.stringify(b));
+    }
+
     createClassPc(){
         let c = new pc();
         c.checkStart();
@@ -192,6 +203,7 @@ class PcConstructor {
         let opsHTML = "";
         elem.forEach(element => {
             if (element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}><div id="price" class="d-none">${element.slice(7)}</div>Price: ${(element.slice(7) * prodElem[1])}</td>`;
+            else if(element.includes("Name"))  opsHTML += `<td id="Name">${element}</td>`
             else opsHTML += `<td>${element}</td>`
 
         });
@@ -251,7 +263,9 @@ class PcConstructor {
             }
         }
     }
-    createModal(price){
+    createModal(price,nameProductList){
+        this.price=price;
+        this.nameProductList=nameProductList;
         this.htmlclear();
         document.querySelector('#products').innerHTML +=`
         <form>
@@ -261,21 +275,26 @@ class PcConstructor {
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="Email" placeholder="Enter email">
+          <input type="mail" class="form-control" id="Email" placeholder="Enter email">
         </div>
         <div class="form-group">
           <label for="exampleInputAddres">Addres</label>
-          <input type="password" class="form-control" id="Addres" placeholder="Enter Addres">
+          <input type="Addres" class="form-control" id="Addres" placeholder="Enter Addres">
         </div>
         <button type="submit" class="btn btn-primary" onclick="h.checkModal()">Submit</button>
       </form> `
     }
 
     checkModal(){
-        if(document.querySelector('#NameSurname').innerHTML!="") {
-            if(!document.querySelector('#Email').value.includes("@")) alert("Email incorect"){
-                alert();
-            }
+        let name =document.querySelector('#NameSurname').value;
+        let mail = document.querySelector('#Email').value;
+        let addres = document.querySelector('#Addres').value;
+        if(name!="") {
+            if(mail.includes("@")){
+                if(addres!=""){
+                    this.addToLocalStorageBuyer(name,mail,addres);
+                }else alert("Introduceti adresa")
+            }else alert("Email incorect");
         }
         else alert("Introduceti numele")
         
