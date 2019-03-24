@@ -80,7 +80,7 @@ class pc {
         if (check) {
             price = (1 - discountProcent / 100) * price;
             alert("Sa Activat reducarea de " + discountProcent + "% pretul e " + price)
-            h.createModal(price);
+            h.createModal(price,this.saveShopingCart());
         }
         else {
             if (discInput = "") {

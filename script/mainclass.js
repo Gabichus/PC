@@ -5,14 +5,15 @@ class PcConstructor {
             this.json = await response.json()
         })()
 
-        let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard','localBuyer'];
+        let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard', 'localBuyer'];
 
         for (let i = 0; i < 9; i++) {
             if (!localStorage.hasOwnProperty(prod[i])) {
-                localStorage.setItem(prod[i], JSON.stringify([]));            }
+                localStorage.setItem(prod[i], JSON.stringify([]));
+            }
         }
-        this.price=0;
-        this.nameProductList=[];
+        this.price = 0;
+        this.nameProductList = [];
     }
 
     getJson() {
@@ -93,43 +94,7 @@ class PcConstructor {
     }
     //#endregion
 
-    addToLocalStorage(localForExist, valueCard) {
-        let checkJson = JSON.parse(localStorage.getItem(localForExist));
-        let isExistBool = false;
-        console.log(checkJson);
-        for (let i = 0; i < checkJson.length; i++) {
-            if (checkJson[i][0] == valueCard[1]) isExistBool = true;
-        }
-        if (!isExistBool) {
-            let a = [];
-            a = JSON.parse(localStorage.getItem(localForExist));
-            a.push([valueCard[1], 1]);
-            localStorage.setItem(localForExist, JSON.stringify(a));
-        }
-    }
-
-    addToLocalStorageBuyer(name,mail,addres){
-        let b=[];
-        b.push(name);
-        b.push(mail);
-        b.push(addres);
-        b.push(this.price);
-        b.push(this.nameProductList);
-        localStorage.setItem('localBuyer', JSON.stringify(b));
-    }
-
-    createClassPc(){
-        let c = new pc();
-        c.checkStart();
-    }
-
-    calcPrice(){
-        let allprice=0;
-        let count = document.querySelectorAll('#itemPrice');
-        for(let i=0;i<count.length;i++) allprice+=parseInt(count[i].textContent.slice(10));
-        document.querySelector('#allPrice').innerHTML=`Total Price: ${allprice}`;
-    }
-
+    //#region Table
     createTable() {
         let prod = ['localcpu', 'localgpu', 'localmotherboard', 'localram', 'localrom', 'localmonitor', 'localmouse', 'localkeyboard'];
         let check = true;
@@ -173,7 +138,7 @@ class PcConstructor {
                             <td colspan="2">
                             <button type="button" class="btn btn-success" onclick="h.createClassPc()">Create PC</button>
                             </td>`
-                            this.calcPrice();
+            this.calcPrice();
         }
 
     }
@@ -203,7 +168,7 @@ class PcConstructor {
         let opsHTML = "";
         elem.forEach(element => {
             if (element.includes("Price")) opsHTML += `<td id="itemPrice" value=${element.slice(7)}><div id="price" class="d-none">${element.slice(7)}</div>Price: ${(element.slice(7) * prodElem[1])}</td>`;
-            else if(element.includes("Name"))  opsHTML += `<td id="Name">${element}</td>`
+            else if (element.includes("Name")) opsHTML += `<td id="Name">${element}</td>`
             else opsHTML += `<td>${element}</td>`
 
         });
@@ -225,6 +190,48 @@ class PcConstructor {
 
         return opsHTML;
     }
+    //#endregion
+
+    addToLocalStorage(localForExist, valueCard) {
+        let checkJson = JSON.parse(localStorage.getItem(localForExist));
+        let isExistBool = false;
+        console.log(checkJson);
+        for (let i = 0; i < checkJson.length; i++) {
+            if (checkJson[i][0] == valueCard[1]) isExistBool = true;
+        }
+        if (!isExistBool) {
+            let a = [];
+            a = JSON.parse(localStorage.getItem(localForExist));
+            a.push([valueCard[1], 1]);
+            localStorage.setItem(localForExist, JSON.stringify(a));
+        }
+    }
+
+    addToLocalStorageBuyer(name, mail, addres) {
+        let temp = JSON.parse(localStorage.getItem('localBuyer'));
+        let b = [];
+        b.push(name);
+        b.push(mail);
+        b.push(addres);
+        b.push(this.price);
+        b.push(this.nameProductList);
+        temp.push(b);
+        localStorage.setItem('localBuyer', JSON.stringify(temp));
+        this.createCpuCard();
+    }
+
+    createClassPc() {
+        let c = new pc();
+        c.checkStart();
+    }
+
+    calcPrice() {
+        let allprice = 0;
+        let count = document.querySelectorAll('#itemPrice');
+        for (let i = 0; i < count.length; i++) allprice += parseInt(count[i].textContent.slice(10));
+        document.querySelector('#allPrice').innerHTML = `Total Price: ${allprice}`;
+    }
+
     increase(localKey, prodElem, productCount) {
         let parsedJson = JSON.parse(localStorage.getItem(localKey));
         let price = productCount.parentElement.parentElement.parentElement.querySelector('#price').innerHTML;
@@ -263,11 +270,11 @@ class PcConstructor {
             }
         }
     }
-    createModal(price,nameProductList){
-        this.price=price;
-        this.nameProductList=nameProductList;
+    createModal(price, nameProductList) {
+        this.price = price;
+        this.nameProductList = nameProductList;
         this.htmlclear();
-        document.querySelector('#products').innerHTML +=`
+        document.querySelector('#products').innerHTML += `
         <form>
         <div class="form-group">
           <label for="Name">Name Surname</label>
@@ -285,19 +292,43 @@ class PcConstructor {
       </form> `
     }
 
-    checkModal(){
-        let name =document.querySelector('#NameSurname').value;
+    checkModal() {
+        let name = document.querySelector('#NameSurname').value;
         let mail = document.querySelector('#Email').value;
         let addres = document.querySelector('#Addres').value;
-        if(name!="") {
-            if(mail.includes("@")){
-                if(addres!=""){
-                    this.addToLocalStorageBuyer(name,mail,addres);
-                }else alert("Introduceti adresa")
-            }else alert("Email incorect");
+        if (name != "") {
+            if (mail.includes("@")) {
+                if (addres != "") {
+                    this.addToLocalStorageBuyer(name, mail, addres);
+                } else alert("Introduceti adresa")
+            } else alert("Email incorect");
         }
         else alert("Introduceti numele")
-        
+
     }
+
+    orderList() {
+        this.htmlclear();
+        let temp = JSON.parse(localStorage.getItem('localBuyer'));
+        for (let i = 0; i < temp.length; i++) {
+            document.querySelector('#products').innerHTML += `
+            <div class="jumbotron">
+            <h1 class="display-4">${temp[i][0]}</h1>
+            <p class="lead">Email: ${temp[i][1]} Addres: ${temp[i][2]} TotalPrice: ${temp[i][3]}</p>
+            <hr class="my-4">
+            ${this.contentOrderList(temp[i])}
+            </div>
+            `
+        }
+    }
+
+    contentOrderList(temp) {
+        let opsHTML="";
+        for(let i=0;i<temp[4].length;i++){
+            opsHTML+=`<p>${temp[4][i]}</p>` 
+        }
+        return opsHTML;
+    }
+
 }
 let h = new PcConstructor();
