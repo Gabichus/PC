@@ -323,9 +323,9 @@ class PcConstructor {
     }
 
     contentOrderList(temp) {
-        let opsHTML="";
-        for(let i=0;i<temp[4].length;i++){
-            opsHTML+=`<p>${temp[4][i]}</p>` 
+        let opsHTML = "";
+        for (let i = 0; i < temp[4].length; i++) {
+            opsHTML += `<p>${temp[4][i]}</p>`
         }
         return opsHTML;
     }
